@@ -95,4 +95,39 @@ public class RegexExprTest {
         assertFalse(regexExpr.matchToPattern("^Mission: successful$", "Next Mission: successful upon capture of target"));
 
     }
+    @Test
+    public void test13() {
+        assertTrue(regexExpr.matchToPattern("^(\\w*\\s(\\d*))$", "Jan 1987"));
+        assertTrue(regexExpr.matchToPattern("^(\\w*\\s(\\d*))$", "May 1969"));
+        assertTrue(regexExpr.matchToPattern("^(\\w*\\s(\\d*))$", "Aug 2011"));
+    }
+    @Test
+    public void test14() {
+        assertTrue(regexExpr.matchToPattern("(\\d{4})x(\\d{3,4})", "1280x720"));
+        assertTrue(regexExpr.matchToPattern("(\\d{4})x(\\d{3,4})", "1920x1600"));
+        assertTrue(regexExpr.matchToPattern("(\\d{4})x(\\d{3,4})", "1024x768"));
+    }
+    @Test
+    public void test15() {
+        assertTrue(regexExpr.matchToPattern("^I\\slove\\s(cats|dogs)$", "I love cats"));
+        assertTrue(regexExpr.matchToPattern("^I\\slove\\s(cats|dogs)$", "I love dogs"));
+        assertFalse(regexExpr.matchToPattern("^I\\slove\\s(cats|dogs)$", "I love logs"));
+        assertFalse(regexExpr.matchToPattern("^I\\slove\\s(cats|dogs)$", "I love cats cogs"));
+    }
+    @Test
+    public void test16() {
+        assertTrue(regexExpr.matchToPattern("^[\\w\\W]*$", "The quick brown fox jumps over the lazy dog."));
+        assertTrue(regexExpr.matchToPattern("^[\\w\\W]*$", "There were 614 instances of students getting 90.0% or above."));
+        assertTrue(regexExpr.matchToPattern("^[\\w\\W]*$", "The FCC had to censor the network for saying &$#*@!."));
+    }
+    @Test
+    public void test17() {
+        assertTrue(regexExpr.matchToPattern("[\\-]*[\\d]+[\\.,]*[\\d]+[e\\d.]*", "3.14529"));
+        assertTrue(regexExpr.matchToPattern("[\\-]*[\\d]+[\\.,]*[\\d]+[e\\d.]*", "-255.34"));
+        assertTrue(regexExpr.matchToPattern("[\\-]*[\\d]+[\\.,]*[\\d]+[e\\d.]*", "128"));
+        assertTrue(regexExpr.matchToPattern("[\\-]*[\\d]+[\\.,]*[\\d]+[e\\d.]*", "1.9e10"));
+        assertTrue(regexExpr.matchToPattern("[\\-]*[\\d]+[\\.,]*[\\d]+[e\\d.]*", "123,340.00"));
+        assertTrue(regexExpr.matchToPattern("[\\-]*[\\d]+[\\.,]*[\\d]+[e\\d.]*", "720p"));
+    }
+
 }
